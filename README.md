@@ -3,9 +3,11 @@
   <a title="简体中文" href="README_zh-CN.md"><img src="https://img.shields.io/badge/-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-545759?style=for-the-badge" alt="简体中文"></a>
 </div>
 
-# ✔[UptimeFlare](https://github.com/lyc8503/UptimeFlare)
+# ✔[UptimeFlare](https://github.com/weizwz/UptimeFlare)
 
 A more advanced, serverless, and free uptime monitoring & status page solution, powered by Cloudflare Workers, complete with a user-friendly interface.
+
+Fork has beautified the interface at https://github.com/lyc8503/UptimeFlare
 
 🎉 **[UPDATE 2026/01/03]** I have just migrated UptimeFlare from KV to D1 Database. I also updated the Terraform Cloudflare provider to v5 and improved the deployment process. The data structure has been optimized to resolve long-standing performance issues.
 
@@ -35,11 +37,11 @@ New users can deploy directly, while existing users can have a simple auto migra
 
 ## 👀Demo
 
-My status page (Online demo): https://uptimeflare.pages.dev/
+My status page (Online demo): https://status.weizwz.com/
 
 Some screenshots:
 
-![Desktop, Light theme](docs/desktop.png)
+![Desktop, Light theme](docs/status.weizwz.com.webp)
 
 ## ⚡Quickstart / 📄Documentation
 

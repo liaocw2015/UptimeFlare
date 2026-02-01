@@ -3,9 +3,11 @@
   <a title="简体中文" href="README_zh-CN.md"><img src="https://img.shields.io/badge/-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-A31F34?style=for-the-badge" alt="简体中文"></a>
 </div>
 
-# ✔[UptimeFlare](https://github.com/lyc8503/UptimeFlare)
+# ✔[UptimeFlare](https://github.com/weizwz/UptimeFlare)
 
 一个由 Cloudflare Workers 驱动的功能丰富、Serverless 且免费的 Uptime 监控及状态页面。
+
+fork 于 https://github.com/lyc8503/UptimeFlare，进行了界面美化
 
 ## ⭐功能
 
@@ -30,11 +32,11 @@
 
 ## 👀演示
 
-我自己的状态页面（在线演示）：https://uptimeflare.pages.dev/
+我自己的状态页面（在线演示）：https://status.weizwz.com/
 
 一些截图：
 
-![桌面，浅色主题](docs/desktop.png)
+![Desktop, Light theme](docs/status.weizwz.com.webp)
 
 ## ⚡快速入门 / 📄文档
 

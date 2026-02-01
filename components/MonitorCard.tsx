@@ -230,12 +230,19 @@ export default function MonitorCard({
         <div className="w-full aspect-video max-h-32 bg-white dark:bg-zinc-800 overflow-hidden">
           <div className="relative w-full h-full overflow-hidden rounded-lg dark:bg-zinc-800">
             {monitor.preview ? (
-              <Image
-                src={monitor.preview}
-                alt={monitor.name}
-                fill
-                className="w-full h-full object-cover object-top origin-top transition-transform duration-700 group-hover:scale-150"
-              />
+              <a
+                href={monitor.statusPageLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full h-full"
+              >
+                <Image
+                  src={monitor.preview}
+                  alt={monitor.name}
+                  fill
+                  className="w-full h-full object-cover object-top origin-top transition-transform duration-700 group-hover:scale-150"
+                />
+              </a>
             ) : (
               <div className="flex items-center justify-center w-full h-full text-slate-200 dark:text-zinc-700">
                 <IconCloud size={64} stroke={1} className="mt-6" />
@@ -267,21 +274,16 @@ export default function MonitorCard({
           </div>
 
           {/* Header Info - Overlay on Image (Top Left) */}
-          <div className="absolute top-3 left-3 max-w-[calc(100%-140px)] px-2 py-1 bg-white/80 backdrop-blur-[2px] rounded-full overflow-hidden">
+          <div className="absolute top-3 left-3 max-w-[calc(100%-140px)] px-2 py-1 bg-white/50 backdrop-blur-[1px] rounded-br-2xl overflow-hidden">
             {monitor.statusPageLink ? (
-              <a
-                href={monitor.statusPageLink}
-                target="_blank"
-                className="flex flex-col cursor-pointer hover:text-emerald-500"
-                onClick={(e) => e.stopPropagation()}
-              >
+              <>
                 <h3 className="w-fit font-bold text-sm leading-tight">{monitor.name}</h3>
                 {monitor.target && (
                   <div className="text-[10px] font-mono text-gray-700">
                     {new URL(monitor.target).hostname}
                   </div>
                 )}
-              </a>
+              </>
             ) : (
               <h3 className="w-fit font-bold text-sm leading-tight">{monitor.name}</h3>
             )}

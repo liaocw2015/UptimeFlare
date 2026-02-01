@@ -257,8 +257,17 @@ const workerConfig: WorkerConfig = {
 // During maintenance, an alert will be shown at status page
 // Also, related downtime notifications will be skipped (if any)
 // Of course, you can leave it empty if you don't need this feature
+// colors: gray, blue, red, yellow
 
-const maintenances: MaintenanceConfig[] = []
+const maintenances: MaintenanceConfig[] = [
+  // {
+  //   title: '图床服务维护',
+  //   body: '正在进行图床服务器升级维护，预计2小时完成',
+  //   monitors: ['picture'],
+  //   start: '2026-02-01T18:00:00+08:00',
+  //   end: '2026-02-21T23:00:00+08:00',
+  // },
+]
 
 // const maintenances: MaintenanceConfig[] = [
 //   {

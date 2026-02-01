@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { Stack, Text, Modal } from '@mantine/core'
 import { useState } from 'react'
+import { maintenances } from '@/uptime.config'
 
 export default function MonitorCard({
   monitor,
@@ -19,10 +20,19 @@ export default function MonitorCard({
   const [modelContent, setModelContent] = useState(<div />)
 
   const incident = state.incident[monitor.id]
-  const status =
-    incident && incident.length > 0 && incident[incident.length - 1].end === undefined
-      ? 'down'
-      : 'up'
+
+  // Check if monitor is in maintenance
+  const now = new Date()
+  const hasMaintenance = maintenances
+    .filter((m) => now >= new Date(m.start) && (!m.end || now <= new Date(m.end)))
+    .find((maintenance) => maintenance.monitors?.includes(monitor.id))
+
+  // Determine status: maintenance > down > up
+  const status = hasMaintenance
+    ? 'maintenance'
+    : incident && incident.length > 0 && incident[incident.length - 1].end === undefined
+    ? 'down'
+    : 'up'
 
   // Get latest latency
   const latencies = state.latency[monitor.id]
@@ -158,21 +168,23 @@ export default function MonitorCard({
                       {formatDuration(dayDownTime)}
                     </span>
                   </div>
-                  {incidentReasons.map((reason, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col gap-2 p-3 rounded-lg border border-slate-100 bg-slate-50 dark:border-zinc-800 dark:bg-zinc-900/50"
-                    >
-                      <div className="flex items-center gap-2">
-                        <div className="px-2 py-0.5 rounded text-xs font-mono font-medium bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400">
-                          {reason.start} - {reason.end}
+                  <div className="max-h-[calc(100vh-200px)] overflow-y-auto">
+                    {incidentReasons.map((reason, index) => (
+                      <div
+                        key={index}
+                        className="flex flex-col gap-2 p-3 rounded-lg border border-slate-100 bg-slate-50 dark:border-zinc-800 dark:bg-zinc-900/50"
+                      >
+                        <div className="flex items-center gap-2">
+                          <div className="px-2 py-0.5 rounded text-xs font-mono font-medium bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400">
+                            {reason.start} - {reason.end}
+                          </div>
+                        </div>
+                        <div className="text-sm text-slate-700 dark:text-slate-300 font-mono break-all">
+                          {reason.error}
                         </div>
                       </div>
-                      <div className="text-sm text-slate-700 dark:text-slate-300 font-mono break-all">
-                        {reason.error}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               )
               setModalOpened(true)
@@ -215,14 +227,14 @@ export default function MonitorCard({
       </Modal>
       <div className="group relative p-5 flex flex-col gap-4 bg-white dark:bg-zinc-900 rounded-3xl shadow-md shadow-slate-200 hover:shadow-xl hover:shadow-slate-200/50 dark:shadow-none dark:hover:shadow-none transition-all duration-300 border border-slate-200 dark:border-zinc-800 overflow-hidden">
         {/* Preview Image Area */}
-        <div className="w-full aspect-video max-h-32 bg-white dark:bg-zinc-800 overflow-hidden mb-4">
+        <div className="w-full aspect-video max-h-32 bg-white dark:bg-zinc-800 overflow-hidden">
           <div className="relative w-full h-full overflow-hidden rounded-lg dark:bg-zinc-800">
             {monitor.preview ? (
               <Image
                 src={monitor.preview}
                 alt={monitor.name}
                 fill
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover object-top origin-top transition-transform duration-700 group-hover:scale-150"
               />
             ) : (
               <div className="flex items-center justify-center w-full h-full text-slate-200 dark:text-zinc-700">
@@ -236,11 +248,21 @@ export default function MonitorCard({
             <div
               className={`
               flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase backdrop-blur-md shadow-sm border border-white/10
-              ${status === 'up' ? 'bg-emerald-500/90 text-white' : 'bg-rose-500/90 text-white'}
+              ${
+                status === 'maintenance'
+                  ? 'bg-yellow-500/90 text-white'
+                  : status === 'up'
+                  ? 'bg-emerald-500/90 text-white'
+                  : 'bg-red-500/90 text-white'
+              }
             `}
             >
               <div className={`w-2 h-2 rounded-full bg-white animate-pulse`} />
-              {status === 'up' ? t('Operational') : t('Down')}
+              {status === 'maintenance'
+                ? t('Maintenance')
+                : status === 'up'
+                ? t('Operational')
+                : t('Down')}
             </div>
           </div>
 

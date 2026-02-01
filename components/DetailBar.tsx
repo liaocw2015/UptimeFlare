@@ -152,22 +152,23 @@ export default function DetailBar({
                     <span className="font-semibold text-rose-500">
                       {formatDuration(dayDownTime)}
                     </span>
-                  </div>
-                  {incidentReasons.map((reason, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col gap-2 p-3 rounded-lg border border-slate-100 bg-slate-50 dark:border-zinc-800 dark:bg-zinc-900/50"
-                    >
-                      <div className="flex items-center gap-2">
-                        <div className="px-2 py-0.5 rounded text-xs font-mono font-medium bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400">
-                          {reason.start} - {reason.end}
+                    <div className="max-h-[calc(100vh-200px)] overflow-y-auto"></div>
+                    {incidentReasons.map((reason, index) => (
+                      <div
+                        key={index}
+                        className="flex flex-col gap-2 p-3 rounded-lg border border-slate-100 bg-slate-50 dark:border-zinc-800 dark:bg-zinc-900/50"
+                      >
+                        <div className="flex items-center gap-2">
+                          <div className="px-2 py-0.5 rounded text-xs font-mono font-medium bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400">
+                            {reason.start} - {reason.end}
+                          </div>
+                        </div>
+                        <div className="text-sm text-slate-700 dark:text-slate-300 font-mono break-all">
+                          {reason.error}
                         </div>
                       </div>
-                      <div className="text-sm text-slate-700 dark:text-slate-300 font-mono break-all">
-                        {reason.error}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               )
               setModalOpened(true)

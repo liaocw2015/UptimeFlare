@@ -1,8 +1,9 @@
 import { MaintenanceConfig, MonitorTarget } from '@/types/config'
-import { Collapse } from '@mantine/core'
-import { IconCheck, IconX, IconAlertCircle, IconActivity } from '@tabler/icons-react'
+import { Collapse, Button } from '@mantine/core'
+import { IconCheck, IconX, IconAlertCircle, IconActivity, IconHistory } from '@tabler/icons-react'
 import { useState } from 'react'
 import MaintenanceAlert from './MaintenanceAlert'
+import IncidentsDrawer from './IncidentsDrawer'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 
@@ -41,6 +42,7 @@ export default function OverallStatus({
   }
 
   const [expandUpcoming, setExpandUpcoming] = useState(false)
+  const [drawerOpened, setDrawerOpened] = useState(false)
 
   const now = new Date()
 
@@ -89,13 +91,27 @@ export default function OverallStatus({
         <StatusIcon stroke={3} size={28} />
         <span>{statusString}</span>
       </div>
-      <div className="mt-2 flex items-center justify-center gap-2 text-sm text-gray-400">
-        <IconActivity size={14} />
-        <span>
-          {t('Last updated on', {
-            date: new Date(state.lastUpdate * 1000).toLocaleString(),
-          })}
-        </span>
+      <div className="mt-3 flex items-center justify-center gap-2 text-sm text-gray-400">
+        <div className="flex items-center gap-1">
+          <IconActivity size={14} />
+          <span>
+            {t('Last updated on', {
+              date: new Date(state.lastUpdate * 1000).toLocaleString(),
+            })}
+          </span>
+        </div>
+        <Button
+          variant="subtle"
+          size="xs"
+          leftSection={<IconHistory size={14} />}
+          onClick={() => setDrawerOpened(true)}
+          color="gray"
+          styles={{
+            section: { marginRight: 4 },
+          }}
+        >
+          {t('Incidents')}
+        </Button>
       </div>
 
       {/* Upcoming Maintenance */}
@@ -132,6 +148,9 @@ export default function OverallStatus({
           />
         ))}
       </div>
+
+      {/* Incidents Drawer */}
+      <IncidentsDrawer opened={drawerOpened} onClose={() => setDrawerOpened(false)} />
     </div>
   )
 }

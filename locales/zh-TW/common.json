@@ -38,6 +38,6 @@
   "Monitor State not defined": "站點狀態未定義，請檢查您的 Worker 狀態與 KV 綁定！",
   "All": "全部",
   "Select monitor": "選取站點",
-  "Backwards": "← 上個月",
-  "Forward": "下個月 →"
+  "Backwards": "上個月",
+  "Forward": "下個月"
 }

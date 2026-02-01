@@ -38,6 +38,6 @@
   "Monitor State not defined": "Monitor State is not defined now, please check your worker's status and binding!",
   "All": "All",
   "Select monitor": "Select monitor",
-  "Backwards": "← Backwards",
-  "Forward": "Forward →"
+  "Backwards": "Backwards",
+  "Forward": "Forward"
 }

@@ -1,9 +1,9 @@
-import { Tooltip } from '@mantine/core'
-import { IconCloud } from '@tabler/icons-react'
+import { Tooltip, Drawer, Badge } from '@mantine/core'
+import { IconCloud, IconAlertTriangle, IconCalendar, IconClock } from '@tabler/icons-react'
 import { MonitorTarget, MonitorState } from '@/types/config'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
-import { Stack, Text, Modal } from '@mantine/core'
+import { Stack, Text } from '@mantine/core'
 import { useState } from 'react'
 import { maintenances } from '@/uptime.config'
 
@@ -15,9 +15,12 @@ export default function MonitorCard({
   state: MonitorState
 }) {
   const { t } = useTranslation('common')
-  const [modalOpened, setModalOpened] = useState(false)
-  const [modalTitle, setModalTitle] = useState('')
-  const [modelContent, setModelContent] = useState(<div />)
+  const [drawerOpened, setDrawerOpened] = useState(false)
+  const [drawerTitle, setDrawerTitle] = useState('')
+  const [drawerIncidents, setDrawerIncidents] = useState<
+    { start: string; end: string; error: string }[]
+  >([])
+  const [drawerDowntime, setDrawerDowntime] = useState('')
 
   const incident = state.incident[monitor.id]
 
@@ -154,40 +157,15 @@ export default function MonitorCard({
           onClick={(e) => {
             e.stopPropagation()
             if (dayDownTime > 0) {
-              setModalTitle(
+              setDrawerTitle(
                 t('incidents at', {
                   name: monitor.name,
                   date: new Date(dayStart * 1000).toLocaleDateString(),
                 })
               )
-              setModelContent(
-                <div className="flex flex-col gap-3">
-                  <div className="text-sm text-slate-500 mb-2">
-                    {t('Total downtime')}:{' '}
-                    <span className="font-semibold text-rose-500">
-                      {formatDuration(dayDownTime)}
-                    </span>
-                  </div>
-                  <div className="max-h-[calc(100vh-200px)] overflow-y-auto">
-                    {incidentReasons.map((reason, index) => (
-                      <div
-                        key={index}
-                        className="flex flex-col gap-2 p-3 rounded-lg border border-slate-100 bg-slate-50 dark:border-zinc-800 dark:bg-zinc-900/50"
-                      >
-                        <div className="flex items-center gap-2">
-                          <div className="px-2 py-0.5 rounded text-xs font-mono font-medium bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400">
-                            {reason.start} - {reason.end}
-                          </div>
-                        </div>
-                        <div className="text-sm text-slate-700 dark:text-slate-300 font-mono break-all">
-                          {reason.error}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )
-              setModalOpened(true)
+              setDrawerDowntime(formatDuration(dayDownTime))
+              setDrawerIncidents(incidentReasons)
+              setDrawerOpened(true)
             }
           }}
         />
@@ -215,16 +193,62 @@ export default function MonitorCard({
 
   return (
     <>
-      <Modal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        title={modalTitle}
-        size={'40em'}
-        zIndex={200}
+      <Drawer
+        opened={drawerOpened}
+        onClose={() => setDrawerOpened(false)}
+        position="right"
+        size="xl"
+        title={
+          <Text size="xl" fw={800}>
+            {drawerTitle}
+          </Text>
+        }
+        padding="xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {modelContent}
-      </Modal>
+        <Stack gap="md">
+          {/* 总宕机时间 */}
+          <div className="bg-red-50 border-l-4 border-l-red-500 rounded-lg shadow-sm shadow-slate-200 border border-slate-200 px-4 py-3">
+            <div className="flex items-center gap-2">
+              <IconAlertTriangle className="text-red-500" size={18} strokeWidth={2} />
+              <span className="font-semibold text-sm text-red-600">{t('Total downtime')}</span>
+              <Badge size="sm" variant="light" color="red" style={{ textTransform: 'none' }}>
+                {drawerDowntime}
+              </Badge>
+            </div>
+          </div>
+
+          {/* 故障记录列表 */}
+          {drawerIncidents.map((reason, index) => (
+            <div
+              key={index}
+              className="bg-amber-50 border-l-4 border-l-amber-500 rounded-lg shadow-sm shadow-slate-200 border border-slate-200 px-4 py-3"
+            >
+              <div className="flex flex-col gap-2">
+                {/* 时间范围 */}
+                <div className="flex items-center gap-2 text-xs text-gray-600 flex-wrap">
+                  <div className="flex items-center gap-1">
+                    <IconCalendar size={14} className="text-amber-400" />
+                    <span>{reason.start}</span>
+                  </div>
+                  <span className="text-gray-400">→</span>
+                  <div className="flex items-center gap-1">
+                    <IconClock size={14} className="text-amber-400" />
+                    <span>{reason.end}</span>
+                  </div>
+                </div>
+
+                {/* 错误详情 */}
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex flex-col gap-1 p-2 rounded-md border border-slate-100 bg-white/60">
+                    <div className="text-xs text-slate-600 font-mono break-all">{reason.error}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Stack>
+      </Drawer>
       <div className="group relative p-5 flex flex-col gap-4 bg-white dark:bg-zinc-900 rounded-3xl shadow-md shadow-slate-200 hover:shadow-xl hover:shadow-slate-200/50 dark:shadow-none dark:hover:shadow-none transition-all duration-300 border border-slate-200 dark:border-zinc-800 overflow-hidden">
         {/* Preview Image Area */}
         <div className="w-full aspect-video max-h-32 bg-white dark:bg-zinc-800 overflow-hidden">

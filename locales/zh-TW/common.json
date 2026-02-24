@@ -39,5 +39,7 @@
   "All": "全部",
   "Select monitor": "選取站點",
   "Backwards": "上個月",
-  "Forward": "下個月"
+  "Forward": "下個月",
+  "Ongoing": "進行中",
+  "Resolved": "已恢復"
 }

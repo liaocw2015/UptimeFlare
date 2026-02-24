@@ -1,4 +1,4 @@
-import { MaintenanceConfig, MonitorTarget } from '@/types/config'
+import { MaintenanceConfig, MonitorState, MonitorTarget } from '@/types/config'
 import { Collapse, Button } from '@mantine/core'
 import { IconCheck, IconX, IconAlertCircle, IconActivity, IconHistory } from '@tabler/icons-react'
 import { useState } from 'react'
@@ -12,7 +12,7 @@ export default function OverallStatus({
   maintenances,
   monitors,
 }: {
-  state: { overallUp: number; overallDown: number; lastUpdate: number }
+  state: MonitorState
   maintenances: MaintenanceConfig[]
   monitors: MonitorTarget[]
 }) {
@@ -150,7 +150,12 @@ export default function OverallStatus({
       </div>
 
       {/* Incidents Drawer */}
-      <IncidentsDrawer opened={drawerOpened} onClose={() => setDrawerOpened(false)} />
+      <IncidentsDrawer
+        opened={drawerOpened}
+        onClose={() => setDrawerOpened(false)}
+        state={state}
+        monitors={monitors}
+      />
     </div>
   )
 }

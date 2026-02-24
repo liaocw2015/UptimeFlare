@@ -35,6 +35,23 @@ New users can deploy directly, while existing users can have a simple auto migra
   - Optional password authentication (private status page)
   - JSON API for fetching realtime status data
 
+### 🆕Enhancements (Fork)
+
+The following enhancements have been added in this fork:
+
+- **Modern UI redesign** — Refreshed interface using Tailwind CSS v4, glassmorphism effects, and premium visual design
+- **Monitor card component** — Independent monitor cards displaying status, latency, and maintenance state at a glance
+- **In-page auto-refresh** — Status data is polled every 180 seconds via the `/api/status` API without full page reload
+- **Status API with CORS protection** — Secure `/api/status` endpoint with origin-based access control to prevent cross-domain abuse
+- **Incident detail modal** — Click on uptime bars to view detailed incident information including duration and error messages
+- **Incidents drawer** — A slide-out drawer to browse historical incidents, filterable by month and monitor
+- **Real-time incident display** — Shows actual monitoring events with ongoing/resolved status in the incidents drawer
+- **Mobile responsive** — Optimized responsive layout for mobile devices
+- **Monitor grouping** — Reorganized monitor groups with improved spacing and layout
+- **Human-readable duration** — Improved time unit display for incident durations
+- **Custom favicon** — Support for custom site icon
+- **Local development support** — Added local development environment configuration
+
 ## 👀Demo
 
 My status page (Online demo): https://status.weizwz.com/

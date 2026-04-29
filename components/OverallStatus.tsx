@@ -80,7 +80,7 @@ export default function OverallStatus({
             height={64}
           />
           <h1 className="text-2xl md:text-4xl font-black text-emerald-500 tracking-tight">
-            WeizWz
+            Atos
           </h1>
         </div>
         <h1 className="text-2xl md:text-4xl font-black tracking-tight dark:text-white">

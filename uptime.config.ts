@@ -10,9 +10,9 @@ const pageConfig: PageConfig = {
   title: '服务状态 - a2z',
   // Links shown at the header of your status page, could set `highlight` to `true`
   links: [
-    { link: 'https://www.weizwz.com/', label: '主页' },
-    { link: 'https://note.weizwz.com/', label: '博客' },
-    { link: 'https://github.com/weizwz', label: 'GitHub' },
+    { link: 'https://vox.pp.ua/', label: '主页' },
+    { link: 'https://aton.cc.cd/', label: '博客' },
+    { link: 'https://github.com/', label: 'GitHub' },
   ],
   // favicon: '/favicon.ico',
   logo: '/logo.png',
@@ -214,8 +214,8 @@ const workerConfig: WorkerConfig = {
           `;
 
           const resendPayload = {
-            from: "系统状态更新 <uptimeflare@update.2x.nz>",
-            to: ["acofork@foxmail.com"],
+            from: "系统状态更新 <uptimeflare@uptcf.a2z.qzz.io>",
+            to: ["liaocw2015@outlook.com"],
             subject: subject,
             html: htmlContent,
           };

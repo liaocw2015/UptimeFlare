@@ -7,7 +7,7 @@ import { MaintenanceConfig, PageConfig, WorkerConfig } from './types/config'
 
 const pageConfig: PageConfig = {
   // Title for your status page
-  title: '服务状态 - weizwz',
+  title: '服务状态 - a2z',
   // Links shown at the header of your status page, could set `highlight` to `true`
   links: [
     { link: 'https://www.weizwz.com/', label: '主页' },
@@ -17,7 +17,7 @@ const pageConfig: PageConfig = {
   // favicon: '/favicon.ico',
   logo: '/logo.png',
   group: {
-    基础服务: ['weiwz', 'blog', 'picture'],
+    基础服务: ['vox', 'blog', 'picture'],
     实用工具: ['nav', 'cover'],
     演示项目: ['fun_animation', 'charts'],
   },
@@ -62,11 +62,11 @@ const workerConfig: WorkerConfig = {
     //   //checkLocationWorkerRoute: 'https://xxx.example.com',
     // },
     {
-      id: 'weiwz',
+      id: 'vox',
       name: '主页',
       method: 'HEAD',
-      target: 'https://weizwz.com/',
-      statusPageLink: 'https://weizwz.com/',
+      target: 'https://vox.pp.ua/',
+      statusPageLink: 'https://vox.pp.ua/',
       preview: 'https://p.weizwz.com/weizwz_home_fa1de45a5b1594a1.webp',
       hideLatencyChart: false,
       expectedCodes: [200],
@@ -76,8 +76,8 @@ const workerConfig: WorkerConfig = {
       id: 'blog',
       name: '博客',
       method: 'HEAD',
-      target: 'https://note.weizwz.com/',
-      statusPageLink: 'https://note.weizwz.com/',
+      target: 'https://aton.us.ci/',
+      statusPageLink: 'https://aton.us.ci/',
       preview: 'https://p.weizwz.com/siteshot_note.webp',
       hideLatencyChart: false,
       expectedCodes: [200],
@@ -87,17 +87,17 @@ const workerConfig: WorkerConfig = {
       id: 'picture',
       name: '图床',
       method: 'HEAD',
-      target: 'https://p.weizwz.com/favicon.ico',
+      target: 'https://img.a2z.qzz.io/',
       hideLatencyChart: false,
       expectedCodes: [200],
       timeout: 10000,
     },
     {
       id: 'nav',
-      name: '唯知导航',
+      name: 'cpt',
       method: 'HEAD',
-      target: 'https://nav.weizwz.com/',
-      statusPageLink: 'https://nav.weizwz.com/',
+      target: 'https://cpt.a2z.qzz.io/',
+      statusPageLink: 'https://cpt.a2z.qzz.io/',
       preview: 'https://p.weizwz.com/nav/20251120_110028_78c15d3713752f31.webp',
       hideLatencyChart: false,
       expectedCodes: [200],
@@ -107,8 +107,8 @@ const workerConfig: WorkerConfig = {
       id: 'cover',
       name: 'ThisCover',
       method: 'HEAD',
-      target: 'https://cover.weizwz.com/',
-      statusPageLink: 'https://cover.weizwz.com/',
+      target: 'https://vme.a2z.qzz.io/',
+      statusPageLink: 'https://vem.a2z.qzz.io/',
       preview: 'https://p.weizwz.com/cover/cover.weizwz.com_8_5_b3d6c714f8bb59de.webp',
       hideLatencyChart: false,
       expectedCodes: [200],
@@ -159,8 +159,8 @@ const workerConfig: WorkerConfig = {
       // [Required] payload to be sent
       // $MSG will be replaced with the human-readable notification message
       payload: {
-        from: '系统状态更新 <uptimeflare@updates.weizwz.com>',
-        to: ['weizwz@foxmail.com'],
+        from: '系统状态更新 <uptimeflare@uptcf.a2z.qzz.io>',
+        to: ['liaocw2015@outlook.com'],
         subject: 'UptimeFlare 状态更新',
         text: '$MSG',
       },

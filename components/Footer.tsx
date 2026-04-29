@@ -13,11 +13,11 @@ export default function Footer() {
             <span className="font-medium">
               Services Status by &nbsp;
               <a
-                href="https://github.com/weizwz"
+                href="https://github.com/"
                 target="_blank"
                 className="font-bold hover:text-emerald-500 transition-colors"
               >
-                weizwz
+                atos
               </a>
             </span>
           </p>

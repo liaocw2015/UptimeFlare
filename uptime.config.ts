@@ -18,7 +18,7 @@ const pageConfig: PageConfig = {
   logo: '/logo.png',
   group: {
     基础服务: ['vox', 'blog', 'picture'],
-    实用工具: ['nav', 'cover'],
+    实用工具: ['nav', 'cover','dh'],
     演示项目: ['fun_animation', 'charts'],
   },
 }
@@ -105,10 +105,21 @@ const workerConfig: WorkerConfig = {
     },
     {
       id: 'cover',
-      name: 'vme',
+      name: 'atomai',
       method: 'HEAD',
-      target: 'https://vme.a2z.qzz.io/',
-      statusPageLink: 'https://vme.a2z.qzz.io/',
+      target: 'https://atomai.bond/',
+      statusPageLink: 'https://atomai.bond/',
+      preview: 'https://p.weizwz.com/cover/cover.weizwz.com_8_5_b3d6c714f8bb59de.webp',
+      hideLatencyChart: false,
+      expectedCodes: [200],
+      timeout: 10000,
+    },
+    {
+      id: 'dh',
+      name: 'doh',
+      method: 'HEAD',
+      target: 'https://doh.aton.cc.cd/',
+      statusPageLink: 'https://doh.aton.cc.cd/',
       preview: 'https://p.weizwz.com/cover/cover.weizwz.com_8_5_b3d6c714f8bb59de.webp',
       hideLatencyChart: false,
       expectedCodes: [200],
